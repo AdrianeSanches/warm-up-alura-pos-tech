@@ -13,16 +13,19 @@ const tempDesCurto = 300;
 const tempDesLongo = 900;
 
 btnFoco.addEventListener("click", () => {
-  html.setAttribute("data-contexto", "foco");
-  img.setAttribute("src", "/projeto-fokus/imagens/foco.png");
+  alterarContexto("foco");
 });
 
 btnDesCurto.addEventListener("click", () => {
-  html.setAttribute("data-contexto", "descanso-curto");
-  img.setAttribute("src", "/projeto-fokus/imagens/descanso-curto.png");
+  alterarContexto("descanso-curto");
 });
 
 btnDesLongo.addEventListener("click", () => {
-  html.setAttribute("data-contexto", "descanso-longo");
-  img.setAttribute("src", "/projeto-fokus/imagens/descanso-longo.png");
+  alterarContexto("descanso-longo");
 });
+
+function alterarContexto(contexto) {
+  // é possível fazer isso, porque os atributos possuem o mesmo nome
+  html.setAttribute("data-contexto", contexto);
+  img.setAttribute("src", `/projeto-fokus/imagens/${contexto}.png`);
+}
