@@ -7,6 +7,7 @@ Comandos para manipular o DOM via console do navegador
 - document.querySelectorAll("button"): retorna uma NodeList, um array com todos as tags button que foram encontradas no DOM
 - document.getElementsByXXXX(""): utilizado para selecionar componentes no DOM. Os X's representam as opções que temos para selecionar o elemento, como por exemplo o ID (document.getElementById("start-pause"))
 - atributo defer: o atributo defer dentro da tag script no arquivo html é utilizado para fazer com que quando esta página for carregada no navegador, vai ser lido todo o HTML e por último o js
+  Nota: Certifique-se de que o JavaScript seja carregado após a renderização do DOM, para que os elementos estejam acessíveis antes de tentar manipular suas classes.
 
 ---
 
@@ -66,8 +67,41 @@ Métodos
   O método innerHTML permite que você insira ou substitua o conteúdo HTML de um elemento.
   Você seleciona um elemento HTML (como uma div, p, h1, etc.) usando métodos como document.getElementById ou document.querySelector, e então usa innerHTML para definir ou obter o HTML dentro desse elemento.
   O sinal de + no exemplo elementoMensagem2 faz com qe um novo parágrafo seja inserido, sem alterar o original, fazendo com que 2 parágrafos sejam exibidos
+
   - exemplos
     const elementoMensagem = document.getElementById('mensagem');
     elementoMensagem.innerHTML = '<p>Nova mensagem!</p><img src="imagem.jpg">';
     const elementoMensagem2 = document.getElementById('mensagem');
     elementoMensagem.innerHTML += '<p>Nova mensagem!</p><img src="imagem.jpg">';
+
+- classList
+  O classList é uma propriedade do JavaScript que representa uma lista de classes CSS. Ele fornece métodos que facilitam a adição, remoção e verificação de classes, tornando a manipulação de classes CSS mais eficiente e menos suscetível a erros de programação.
+  - Adicionando uma classe
+    Para adicionar uma classe a um elemento HTML, podemos usar o método add() do classList. Este método aceita o nome da classe como argumento e adiciona a classe ao elemento, se ela ainda não estiver presente.
+    const element = document.getElementById('meuElemento');
+    element.classList.add('minhaClasse');
+  - Removendo uma classe
+    Para remover uma classe de um elemento HTML, podemos utilizar o método remove() do classList. Este método aceita o nome da classe como argumento e remove a classe do elemento, se ela estiver presente.
+    const element = document.getElementById('meuElemento');
+    element.classList.remove('minhaClasse');
+  - Alternando uma classe
+    O método toggle() do classList permite alternar uma classe em um elemento. Se a classe já estiver presente no elemento, o método a remove; caso contrário, ele a adiciona.
+    const element = document.getElementById('meuElemento');
+    element.classList.toggle('minhaClasse');
+  - Verificando se uma classe está presente
+    Para verificar se uma classe específica está associada a um elemento, podemos usar o método contains() do classList
+    const element = document.getElementById('meuElemento');
+    if (element.classList.contains('minhaClasse')) {
+    // A classe 'minhaClasse' está presente no elemento
+    // Faça algo aqui...
+    }
+  - Substituindo classes
+    Podemos substituir uma classe por outra usando os métodos add() e remove() em sequência.
+    const element = document.getElementById('meuElemento');
+    element.classList.remove('classeAntiga');
+    element.classList.add('classeNova');
+  - Manipulando várias classes simultaneamente
+    É possível adicionar ou remover várias classes de uma vez usando o método add() ou remove() passando vários argumentos separados por vírgula.
+    const element = document.getElementById('meuElemento');
+    element.classList.add('classe1', 'classe2', 'classe3');
+    element.classList.remove('classe2', 'classe3');
