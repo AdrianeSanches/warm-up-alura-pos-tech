@@ -57,3 +57,17 @@ Manipulação de Atributos
   O método removeAttribute é usado para remover um atributo específico de um elemento HTML. Ele recebe um argumento, que é o nome do atributo que desejamos remover.
   const imagem = document.getElementById('minhaImagem');
   imagem.removeAttribute('alt');
+
+---
+
+Métodos
+
+- innerHTML
+  O método innerHTML permite que você insira ou substitua o conteúdo HTML de um elemento.
+  Você seleciona um elemento HTML (como uma div, p, h1, etc.) usando métodos como document.getElementById ou document.querySelector, e então usa innerHTML para definir ou obter o HTML dentro desse elemento.
+  O sinal de + no exemplo elementoMensagem2 faz com qe um novo parágrafo seja inserido, sem alterar o original, fazendo com que 2 parágrafos sejam exibidos
+  - exemplos
+    const elementoMensagem = document.getElementById('mensagem');
+    elementoMensagem.innerHTML = '<p>Nova mensagem!</p><img src="imagem.jpg">';
+    const elementoMensagem2 = document.getElementById('mensagem');
+    elementoMensagem.innerHTML += '<p>Nova mensagem!</p><img src="imagem.jpg">';
