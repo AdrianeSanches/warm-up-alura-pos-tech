@@ -1,3 +1,7 @@
+Curso: JavaScript: manipulando elementos no DOM
+
+---
+
 Comandos para manipular o DOM via console do navegador
 
 - DOM: O DOM, que significa Modelo de Objeto de Documentos (Documents Object Model), não se resume ao documento em si. O DOM representa a estrutura de um documento através de uma árvore de objetos, onde cada objeto representa uma parte do documento (como arquivos HTML, CSS, JavaScript e outras APIs inseridas no projeto).
