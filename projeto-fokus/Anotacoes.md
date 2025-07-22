@@ -61,6 +61,13 @@ Manipulação de Atributos
 
 ---
 
+Manipulação de Texto
+
+- textContent
+  A propriedade textContent permite que você defina o conteúdo de texto de um elemento HTML. Diferente do innerHTML que permite a inclusão de tags, o textContent só permite a inclusão e alteração de textos.
+
+---
+
 Métodos
 
 - innerHTML

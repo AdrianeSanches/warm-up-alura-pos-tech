@@ -9,6 +9,8 @@ const musicaPlay = new Audio("/projeto-fokus/sons/play.wav");
 const musicaPause = new Audio("/projeto-fokus/sons/pause.mp3");
 const musicaBeep = new Audio("/projeto-fokus/sons/beep.mp3");
 const botaoContinuar = document.querySelector("#start-pause");
+const btnComecarPausar = document.querySelector("#start-pause span");
+const imgComecarPausar = document.querySelector("#start-pause img");
 let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
 
@@ -93,6 +95,8 @@ function iniciarOuPausar() {
     return;
   }
 
+  btnComecarPausar.textContent = "Pausar";
+  imgComecarPausar.setAttribute("src", "/projeto-fokus/imagens/pause.png");
   musicaPlay.play();
   intervaloId = setInterval(contagemRegressiva, 1000);
 }
@@ -100,4 +104,6 @@ function iniciarOuPausar() {
 function zerar() {
   clearInterval(intervaloId);
   intervaloId = null;
+  btnComecarPausar.textContent = "Começar";
+  imgComecarPausar.setAttribute("src", "/projeto-fokus/imagens/play_arrow.png");
 }
