@@ -5,6 +5,22 @@ const btnDesLongo = document.querySelector(".app__card-button--longo");
 const botoes = document.querySelectorAll(".app__card-button");
 const musicaFocoInput = document.querySelector("#alternar-musica");
 const musica = new Audio("/projeto-fokus/sons/luna-rise-part-one.mp3");
+const musicaPlay = new Audio("/projeto-fokus/sons/play.wav");
+const musicaPause = new Audio("/projeto-fokus/sons/pause.mp3");
+const musicaBeep = new Audio("/projeto-fokus/sons/beep.mp3");
+const botaoContinuar = document.querySelector("#start-pause");
+let tempoDecorridoEmSegundos = 5;
+let intervaloId = null;
+
+// atividade
+const cardSection = document.querySelector(".app__card");
+const img = document.querySelector(".app__image");
+const titulo = document.querySelector(".app__title");
+const btnTemporizador = document.querySelector(".app__card-primary-button");
+const tempFoco = 1500;
+const tempDesCurto = 300;
+const tempDesLongo = 900;
+
 musica.loop = true; // faz com que a música fica tocando o tempo inteiro. Isso porque o tempo das músicas são menores do que o tempo do foco, então essa propriedade faz com que ela entre em loop.
 
 musicaFocoInput.addEventListener("change", () => {
@@ -15,15 +31,6 @@ musicaFocoInput.addEventListener("change", () => {
     musica.pause();
   }
 });
-
-// atividade
-const cardSection = document.querySelector(".app__card");
-const img = document.querySelector(".app__image");
-const titulo = document.querySelector(".app__title");
-const btnTemporizador = document.querySelector(".app__card-primary-button");
-const tempFoco = 1500;
-const tempDesCurto = 300;
-const tempDesLongo = 900;
 
 btnFoco.addEventListener("click", () => {
   alterarContexto("foco");
@@ -64,4 +71,33 @@ function alterarContexto(contexto) {
     default:
       break;
   }
+}
+
+const contagemRegressiva = () => {
+  if (tempoDecorridoEmSegundos <= 0) {
+    musicaBeep.play();
+    alert("Tempo finalizado");
+    zerar();
+    return;
+  }
+  tempoDecorridoEmSegundos -= 1;
+  console.log("Temporizados: " + tempoDecorridoEmSegundos);
+};
+
+botaoContinuar.addEventListener("click", iniciarOuPausar);
+
+function iniciarOuPausar() {
+  if (intervaloId) {
+    musicaPause.play();
+    zerar();
+    return;
+  }
+
+  musicaPlay.play();
+  intervaloId = setInterval(contagemRegressiva, 1000);
+}
+
+function zerar() {
+  clearInterval(intervaloId);
+  intervaloId = null;
 }
