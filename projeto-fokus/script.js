@@ -11,7 +11,7 @@ const musicaBeep = new Audio("/projeto-fokus/sons/beep.mp3");
 const botaoContinuar = document.querySelector("#start-pause");
 const btnComecarPausar = document.querySelector("#start-pause span");
 const imgComecarPausar = document.querySelector("#start-pause img");
-let tempoDecorridoEmSegundos = 5;
+const tempoNaTela = document.querySelector("#timer");
 let intervaloId = null;
 
 // atividade
@@ -22,6 +22,8 @@ const btnTemporizador = document.querySelector(".app__card-primary-button");
 const tempFoco = 1500;
 const tempDesCurto = 300;
 const tempDesLongo = 900;
+
+let tempoDecorridoEmSegundos = tempFoco;
 
 musica.loop = true; // faz com que a música fica tocando o tempo inteiro. Isso porque o tempo das músicas são menores do que o tempo do foco, então essa propriedade faz com que ela entre em loop.
 
@@ -35,18 +37,24 @@ musicaFocoInput.addEventListener("change", () => {
 });
 
 btnFoco.addEventListener("click", () => {
+  tempoDecorridoEmSegundos = tempFoco;
   alterarContexto("foco");
 });
 
 btnDesCurto.addEventListener("click", () => {
+  tempoDecorridoEmSegundos = tempDesCurto;
   alterarContexto("descanso-curto");
 });
 
 btnDesLongo.addEventListener("click", () => {
+  tempoDecorridoEmSegundos = tempDesLongo;
   alterarContexto("descanso-longo");
 });
 
 function alterarContexto(contexto) {
+  zerar();
+  mostrarTempo();
+
   // é possível fazer isso, porque os atributos possuem o mesmo nome
   html.setAttribute("data-contexto", contexto);
   img.setAttribute("src", `/projeto-fokus/imagens/${contexto}.png`);
@@ -83,7 +91,7 @@ const contagemRegressiva = () => {
     return;
   }
   tempoDecorridoEmSegundos -= 1;
-  console.log("Temporizados: " + tempoDecorridoEmSegundos);
+  mostrarTempo();
 };
 
 botaoContinuar.addEventListener("click", iniciarOuPausar);
@@ -107,3 +115,14 @@ function zerar() {
   btnComecarPausar.textContent = "Começar";
   imgComecarPausar.setAttribute("src", "/projeto-fokus/imagens/play_arrow.png");
 }
+
+function mostrarTempo() {
+  const tempo = new Date(tempoDecorridoEmSegundos * 1000);
+  const tempoFormatado = tempo.toLocaleTimeString("pt-br", {
+    minute: "2-digit",
+    second: "2-digit",
+  });
+  tempoNaTela.innerHTML = `${tempoFormatado}`;
+}
+
+mostrarTempo();
