@@ -1,3 +1,4 @@
+// import Conta from "../types/Conta-antiga.js"; --> import antigo
 import Conta from "../types/Conta.js";
 import { FormatoData } from "../types/FormatoData.js";
 import { formatarMoeda, formatarData } from "../utils/formatters.js";
@@ -35,6 +36,6 @@ function renderizarExtrato() {
 const ExtratoComponent = {
     atualizar() {
         renderizarExtrato();
-    }
+    },
 };
 export default ExtratoComponent;
