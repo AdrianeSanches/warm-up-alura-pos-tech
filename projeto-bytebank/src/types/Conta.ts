@@ -1,4 +1,5 @@
 import { Armazenador } from "../utils/Armazenador.js";
+import { ValidaDebito, ValidaDeposito } from "./Decorators.js";
 import { GrupoTransacao } from "./GrupoTransacao.js";
 import { TipoTransacao } from "./TipoTransacao.js";
 import { Transacao } from "./Transacao.js";
@@ -56,25 +57,32 @@ export class Conta {
     return gruposTransacoes;
   }
 
+  @ValidaDeposito
   private depositar(valor: number): void {
-    if (valor <= 0) {
-      throw new Error("O valor a ser depositado deve ser maior que zero!");
-    }
+    // substituindo a validação da funcao pela validação do decorator
+    // if (valor <= 0) {
+    //   throw new Error("O valor a ser depositado deve ser maior que zero!");
+    // }
 
     this.saldo += valor;
     Armazenador.salvar("saldo", this.saldo.toString());
   }
 
+  // necessario incluir a propriedade experimentalDecorators no tsconfig.json como true para ativar o decorator, porque ele vem por padrão desativado
+  @ValidaDebito
   private debitar(valor: number): void {
-    if (valor <= 0) {
+    this.saldo -= valor;
+    Armazenador.salvar("saldo", this.saldo.toString());
+
+    // Decorators são funcões que podem aplicar para acontecer antes de um metodo e a sintax para chamar ele é @NomeDoDecorator em cima do metodo
+    // substituindo o código abaixo e pelo Decorator
+    /*    if (valor <= 0) {
       throw new Error("O valor a ser debitado deve ser maior que zero!");
     }
     if (valor > this.saldo) {
       throw new Error("Saldo insuficiente!");
     }
-
-    this.saldo -= valor;
-    Armazenador.salvar("saldo", this.saldo.toString());
+    */
   }
 
   public registrarTransacao(novaTransacao: Transacao): void {
