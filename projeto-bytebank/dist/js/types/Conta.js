@@ -73,5 +73,16 @@ export class Conta {
         Armazenador.salvar("transacoes", JSON.stringify(this.transacoes));
     }
 }
+export class ContaPremium extends Conta {
+    registrarTransacao(transacao) {
+        if (transacao.tipoTransacao === TipoTransacao.DEPOSITO) {
+            console.log("ganhou um bonus de 0,50");
+            transacao.valor += 0.5;
+        }
+        // ao usar o super em vez do this, ele consome método da classe mãe, que é a classe Conta. Se colocássemos o this, ele iria sobrescrever o método da classe mãe
+        super.registrarTransacao(transacao);
+    }
+}
 const conta = new Conta("Joana da Silva Oliveira");
+const contaPremium = new ContaPremium("Carolina Andrade");
 export default conta;
